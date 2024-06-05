@@ -1,18 +1,17 @@
 const request = require('supertest');
 const app = require('../src/app');
 const User = require('../src/models/userModel');
-const { connectDB, closeDB }= require('../src/database/mongo')
+const { connectDB, closeDB } = require('../src/database/mongo')
+
+let arrUserId = []
 
 beforeAll(async () => {
     await connectDB();
 });
 
 afterAll(async () => {
+    await User.deleteMany({_id:{$in:arrUserId}})
     await closeDB();
-});
-
-afterEach(async () => {
-    await User.deleteMany({});
 });
 
 describe('User API', () => {
@@ -25,6 +24,8 @@ describe('User API', () => {
             });
         expect(res.statusCode).toEqual(201);
         expect(res.body).toHaveProperty('_id');
+
+        arrUserId.push(res.body._id)
     });
 
     it('should get a user by id', async () => {
@@ -34,6 +35,8 @@ describe('User API', () => {
         const res = await request(app).get(`/api/users/${user._id}`);
         expect(res.statusCode).toEqual(200);
         expect(res.body).toHaveProperty('name', 'John Doe');
+
+        arrUserId.push(res.body._id)
     });
 
     it('should delete a user by id', async () => {
@@ -43,6 +46,8 @@ describe('User API', () => {
         const res = await request(app).delete(`/api/users/${user._id}`);
         expect(res.statusCode).toEqual(200);
         expect(res.body._id).toEqual(`${newUser._id}`);
+
+        arrUserId.push(`${user._id}`)
     });
 
     it('should get a list of users', async () => {
@@ -53,6 +58,10 @@ describe('User API', () => {
 
         const res = await request(app).get('/api/users');
         expect(res.statusCode).toEqual(200);
-        expect(res.body.length).toEqual(2);
+        expect(res.body.length >= 2).toBeTruthy();
+
+        arrUserId.push(`${user1._id}`)
+        arrUserId.push(`${user2._id}`)
+
     });
 });

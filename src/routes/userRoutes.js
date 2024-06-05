@@ -102,12 +102,14 @@ router.get('/users/:id', validateUserId, userController.viewUser);
  *         schema:
  *           type: integer
  *           default: 1
+ *         required: true
  *         description: The page number
  *       - in: query
  *         name: limit
  *         schema:
  *           type: integer
  *           default: 10
+ *         required: true
  *         description: The number of items per page
  *     responses:
  *       200:
@@ -137,8 +139,12 @@ router.get('/users', userController.listUsers);
  *         required: true
  *         description: The user id
  *     responses:
- *       204:
- *         description: The user was deleted
+ *       200:
+ *         description: The user description by id
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/User'
  *       400:
  *         description: Invalid ID
  *       404:

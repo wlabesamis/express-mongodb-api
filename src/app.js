@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const { connectDB }= require('./database/mongo')
+const { connectDB } = require('./database/mongo')
 const swaggerUi = require('swagger-ui-express');
 const swaggerSpecs = require('./utils/swagger');
 const userRoutes = require('./routes/userRoutes');
