@@ -29,12 +29,13 @@ describe('User API', () => {
     });
 
     it('should get a user by id', async () => {
-        const user = new User({ name: 'John Doe', age: 30 });
+        const user = new User({ name: 'Wilson Abesamis', age: 42 });
         await user.save();
 
         const res = await request(app).get(`/api/users/${user._id}`);
         expect(res.statusCode).toEqual(200);
-        expect(res.body).toHaveProperty('name', 'John Doe');
+        expect(res.body).toHaveProperty('name', 'Wilson Abesamis');
+        expect(res.body).toHaveProperty('age', 42);
 
         arrUserId.push(res.body._id)
     });
@@ -56,9 +57,13 @@ describe('User API', () => {
         await user1.save();
         await user2.save();
 
-        const res = await request(app).get('/api/users');
+        const res = await request(app).get('/api/users')
+                            .query({
+                                page: 1,
+                                limit: 2
+                            });
         expect(res.statusCode).toEqual(200);
-        expect(res.body.length >= 2).toBeTruthy();
+        expect(res.body.length).toEqual(2);
 
         arrUserId.push(`${user1._id}`)
         arrUserId.push(`${user2._id}`)
