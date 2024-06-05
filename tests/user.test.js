@@ -1,17 +1,14 @@
 const request = require('supertest');
-const mongoose = require('mongoose');
 const app = require('../src/app');
 const User = require('../src/models/userModel');
+const { connectDB, closeDB }= require('../src/database/mongo')
 
 beforeAll(async () => {
-    await mongoose.connect(process.env.MONGO_URI, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-    });
+    await connectDB();
 });
 
 afterAll(async () => {
-    await mongoose.connection.close();
+    await closeDB();
 });
 
 afterEach(async () => {
