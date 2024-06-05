@@ -10,29 +10,38 @@ This project is a simple Express.js API with MongoDB integration. It includes Sw
 ## Installation
 
 1. Clone the repository:
-> git clone https://github.com/your-username/express-mongodb-api.git
-> cd express-mongodb-api
+```
+git clone https://github.com/your-username/express-mongodb-api.git
+cd express-mongodb-api
+```
 
 2. Install the dependencies:
-> npm install
+```
+npm install
+```
 
 3. Create a .env file in the root directory with the following content:
-> MONGO_URI=mongodb://localhost:27017/express-mongodb-api
-> PORT=4000
+```
+MONGO_URI=mongodb://localhost:27017/express-mongodb-api
+PORT=4000
+```
 
 4. Running the Application
 To start the application, use:  
-> npm start
+```
+npm start
+```
 
-The API will be available at http://localhost:3000.
+## The API will be available at http://localhost:3000.
 
 ## API Documentation
 Swagger documentation is available at http://localhost:3000/api-docs.
 
 ## Running the Tests
 To run the unit tests, use:
-> npm test
-
+```
+npm test
+```
 
 Project Structure
 
