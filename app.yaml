@@ -1,0 +1,6 @@
+service: api-dev
+runtime: nodejs22
+
+handlers:
+- url: /.*
+  script: auto

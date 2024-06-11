@@ -1,5 +1,6 @@
 const swaggerJsDoc = require('swagger-jsdoc');
-const PORT = process.env.API_PORT || 4000;
+const PORT = process.env.API_PORT || 8080;
+const API_ENDPOINT = process.env.API_ENDPOINT || `http://localhost:${PORT}/api`
 
 const options = {
     definition: {
@@ -11,7 +12,7 @@ const options = {
         },
         servers: [
             {
-                url: `http://localhost:${PORT}/api`
+                url: `${API_ENDPOINT}`
             }
         ]
     },
