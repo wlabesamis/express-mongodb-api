@@ -1,4 +1,4 @@
-service: api
+service: api-dev
 runtime: nodejs22
 
 instance_class: B1  # Customize as needed, e.g., F2 for more resources
@@ -8,12 +8,12 @@ manual_scaling:
 
 env_variables:
   MONGO_URI: mongodb://34.121.50.235:27017/
-  DB_NAME: test_users
+  DB_NAME: test_users_dev
   DB_USER: admin
   DB_PASS: admin@123
   API_PORT: 8080
-  API_ENDPOINT: https://api.osposstore.online/api
-  NODE_ENV: production
+  API_ENDPOINT: https://api-dev.osposstore.online/api
+  NODE_ENV: dev
 
 handlers:
 - url: /.*
